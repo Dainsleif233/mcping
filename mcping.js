@@ -126,7 +126,12 @@ export default class MinecraftServerPing {
 
             const target = `${this.#resolvedHost}:${this.#resolvedPort}`;
             const info = await this.#readPacket();
-            const latency = await this.#measureLatency();
+            let latency;
+            try {
+                latency = await this.#measureLatency();
+            } catch {
+                latency = null;
+            }
 
             return { target, info, latency };
         } finally {
