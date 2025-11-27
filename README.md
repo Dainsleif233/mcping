@@ -51,7 +51,7 @@ GET /ping/example.com
 
 失败则直接返回错误信息。
 
-## SJMCL DataSource Transfer
+## SJMCL DataSource Transform
 
 将其他数据源转换为 SJMCL 数据源。  
 目前支持：RSS。

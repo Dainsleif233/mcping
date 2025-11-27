@@ -1,6 +1,6 @@
 import mcping from '../../src/mcping';
 
-export async function onRequestGet(ctx: any) {
+export async function onRequestGet(ctx: any): Promise<Response> {
     const params = ctx.params.server;
     const server = Array.isArray(params) ? params[0] : params;
 
