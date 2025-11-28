@@ -1,12 +1,12 @@
 import { SJMCLPost, SJMCLResponse, SJMCLSourceInfo } from "../libs/SJMCL";
 import { parseXMLString, XMLElement } from "../libs/XMLParser";
 
-export default async function (rssUrl: URL, originalUrl: URL) {
+export default async function (rssUrl: string, originalUrl: URL) {
     try {
-        const pageSize = Number(rssUrl.searchParams.get('pageSize')) || 0;
-        rssUrl.searchParams.delete('pageSize');
-        const cursor = Number(rssUrl.searchParams.get('cursor')) || 0;
-        rssUrl.searchParams.delete('cursor');
+        const pageSize = Number(originalUrl.searchParams.get('pageSize')) || 0;
+        originalUrl.searchParams.delete('pageSize');
+        const cursor = Number(originalUrl.searchParams.get('cursor')) || 0;
+        originalUrl.searchParams.delete('cursor');
 
         if (pageSize < 0 || cursor < 0) throw new Error('Invalid page size or cursor');
 
@@ -17,7 +17,7 @@ export default async function (rssUrl: URL, originalUrl: URL) {
         if (!channel) throw new Error('RSS channel not found');
 
         const sourceInfo: SJMCLSourceInfo = {
-            endpointUrl: getEndpointUrl(originalUrl),
+            endpointUrl: originalUrl.toString(),
             fullName: pick(channel, 'description'),
             iconSrc: pick(channel, 'image', 'url') || undefined,
             name: pick(channel, 'title')
@@ -59,12 +59,6 @@ export default async function (rssUrl: URL, originalUrl: URL) {
     } catch (e: any) {
         return new Response(e.message, { status: 500 });
     }
-}
-
-function getEndpointUrl(url: URL) {
-    url.searchParams.delete('pageSize');
-    url.searchParams.delete('cursor');
-    return url.toString();
 }
 
 function pick(root: XMLElement, ...selectors: string[]) {
