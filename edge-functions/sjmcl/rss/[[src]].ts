@@ -9,8 +9,6 @@ export async function onRequestGet(ctx: any): Promise<Response>{
 
     const request: Request = ctx.request;
 
-    console.log(src);
-    console.log(request.url);
-    return new Response();
+    return new Response(`${src}\n${request.url}`);
     // return transform(src, request.url);
 }
