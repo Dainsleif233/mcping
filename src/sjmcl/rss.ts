@@ -1,4 +1,4 @@
-import { SJMCLPost, SJMCLSourceInfo } from "../libs/SJMCL";
+import { SJMCLPost, SJMCLResponse, SJMCLSourceInfo } from "../libs/SJMCL";
 import { parseXMLString, XMLElement } from "../libs/XMLParser";
 
 export default async function (rssUrl: string, originalUrl: string) {
@@ -50,7 +50,14 @@ export default async function (rssUrl: string, originalUrl: string) {
             return post;
         });
 
-        return Response.json({ next, posts, sourceInfo });
+        const sjmclResp: SJMCLResponse = { next, posts, sourceInfo }
+
+        return new Response(
+            JSON.stringify(sjmclResp),
+            {
+                headers: { 'Content-Type': 'application/json' }
+            }
+        );
     } catch (e: any) {
         return new Response(e.message, { status: 500 });
     }
