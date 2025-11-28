@@ -30,7 +30,7 @@ export default async function (rssUrl: string, originalUrl: URL) {
 
         let posts: SJMCLPost[] | undefined;
         if (pageSize === 0) posts = [];
-        else if (items.length > cursor) posts = items.slice(cursor, cursor + pageSize - 1).map(item => {
+        else if (items.length > cursor) posts = items.slice(cursor, cursor + pageSize).map(item => {
             const keywords = item.querySelectorAll('category').map(category => category.textContent);
             const date = formatRssDate(pick(item, 'pubDate'));
 
