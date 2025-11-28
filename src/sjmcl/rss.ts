@@ -1,12 +1,13 @@
 import { SJMCLPost, SJMCLResponse, SJMCLSourceInfo } from "../libs/SJMCL";
 import { parseXMLString, XMLElement } from "../libs/XMLParser";
 
-export default async function (rssUrl: string, originalUrl: URL) {
+export default async function (rssUrl: URL, originalUrl: URL) {
     try {
         const pageSize = Number(originalUrl.searchParams.get('pageSize')) || 0;
         originalUrl.searchParams.delete('pageSize');
         const cursor = Number(originalUrl.searchParams.get('cursor')) || 0;
         originalUrl.searchParams.delete('cursor');
+        rssUrl.search = originalUrl.search;
 
         if (pageSize < 0 || cursor < 0) throw new Error('Invalid page size or cursor');
 
