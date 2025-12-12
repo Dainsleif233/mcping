@@ -111,10 +111,10 @@ export default class MinecraftServerPing {
         this.#port = port;
         this.#resolvedHost = host;
         this.#resolvedPort = port;
+        this.#log = new Logger('MCPing');
     }
 
     async ping() {
-        this.#log = new Logger('MCPing');
         this.#log.info('Starting ping {}:{}', this.#host, this.#port?.toString());
         try {
             if (
