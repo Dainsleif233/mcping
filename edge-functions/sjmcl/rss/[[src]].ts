@@ -2,11 +2,13 @@ import transform from '../../../src/sjmcl/rss';
 import Logger from '../../../src/utils/Logger';
 
 export async function onRequestGet(ctx: any): Promise<Response>{
-    const params: string[] = ctx.params.src;
+    const params: string | string[] = ctx.params.src;
+
+    let src: string;
+    if (Array.isArray(params)) src = params.join('/');
+    else src = params;
     
     return new Response(JSON.stringify(params));
-
-    // const src = params.join('/');
     // const srcUrl = new URL(src);
     // const originalUrl = new URL(ctx.request.url);
 
