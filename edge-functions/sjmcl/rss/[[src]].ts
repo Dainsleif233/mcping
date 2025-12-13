@@ -1,5 +1,5 @@
 import transform from '../../../src/sjmcl/rss';
-import Logger from '../../../src/libs/Logger';
+import Logger from '../../../src/utils/Logger';
 
 export function onRequestGet(ctx: any): Promise<Response>{
     const params: string | string[] = ctx.params.src;

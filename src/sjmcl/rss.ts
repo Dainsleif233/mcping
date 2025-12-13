@@ -1,6 +1,6 @@
 import { SJMCLPost, SJMCLResponse, SJMCLSourceInfo } from "../libs/SJMCL";
 import { parseXMLString, XMLElement } from "../libs/XMLParser";
-import Logger from "../libs/Logger";
+import Logger from "../utils/Logger";
 
 export default async function (rssUrl: URL, originalUrl: URL) {
     const log = new Logger('SJMCL/RSS')
