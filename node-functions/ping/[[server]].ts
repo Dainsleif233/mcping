@@ -8,6 +8,6 @@ export async function onRequestGet(ctx: any): Promise<Response> {
     // const log = new Logger('MCPing');
     // log.info('Pinging {}', server)
     // return new Response(server);
-    console.log(server);
+    // console.log(server);
     return mcping(server);
 }
